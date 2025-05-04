@@ -3,17 +3,13 @@ from sqlalchemy.ext.asyncio import async_sessionmaker, AsyncSession, create_asyn
 """
 Создание движка для SQLite
 """
-engine = create_async_engine(
-    "sqlite+aiosqlite:///blog/blog.db",
-    connect_arg = {"check_same_threads": False}
-)
+engine = create_async_engine("sqlite+aiosqlite:///./blog.db",)
 
 """
 Создание фабрики сессий для работы с БД
 """
 AsyncSessionLocal = async_sessionmaker(
-    bind=engine,
-    class_=AsyncSession,
+    engine,
     expire_on_commit=False
 )
 
